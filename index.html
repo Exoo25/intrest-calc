@@ -1,117 +1,133 @@
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Interest Calculator</title>  
-  	<style>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Calculator</title>
+    <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-      body {  
-        background:linear-gradient(to right, #667eea, #764ba2);  
-        display: flex;  
-        justify-content: center; /* centers horizontally */  
-        align-items: center;     /* centers vertically */  
-        height: 100vh;           /* optional: full screen height */  
-        font-family:"Poppins", sans-serif;
-        
-      } 
+      body {
+        background: linear-gradient(to right, #667eea, #764ba2);
+        display: flex;
+        justify-content: center; /* centers horizontally */
+        align-items: center;     /* centers vertically */
+        height: 100vh;           /* optional: full screen height */
+        font-family: "Poppins", sans-serif;
+      }
+
       body.dark {
-        color:white;
-        font-family:Monospace;  
+        color: white;
+        font-family: Monospace;
       }
-      button {  
-        font-family:Monospace;  
-        border:2px solid rgba(255,255,255,0.1;  
-        padding:5px 10px;  
-        background:rgba(255,255,255,0.1)
-        border-radius:1px;  
-        cursor:pointer;  
-        box-shadow: 2px 2px 0 0 white,  
-                  4px 4px 0 0 black;  
-        transition-duration:500ms;  
-      }  
-      button:hover {  
-        box-shadow: 3px 3px 0 0 white,  
-                  6px 6px 0 0 black;  
-      	transform: translate(-2px, -2px);  
-      }  
-      div {  
-        background:rgba(255,255,255,0.1);  
-        width:300px;  
-        padding:5px 5px;  
-        border-radius:10px;  
-        border:3px solid rgba(255,255,255, 0.1;  
-        box-shadow:0 0 10px rgba(0, 0, 0, 0.4);  
-        transition-duration:500ms;  
+
+      button {
+        font-family: Monospace;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        padding: 5px 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1px;
+        cursor: pointer;
+        box-shadow: 2px 2px 0 0 #667eea 4px 4px 0 0 black;
+        transition-duration: 500ms;
+      }
+
+      button:hover {
+        box-shadow: 3px 3px 0 0 transparent, 4px 4px 0 0 black;
+        transform: translate(-2px, -2px);
+      }
+
+      div {
+        background: rgba(255, 255, 255, 0.1);
+        width: 300px;
+        padding: 5px 5px;
+        border-radius: 10px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        transition-duration: 500ms;
         opacity: 0;
-  		transform: translateY(20px);
-  		animation: fadeSlideUp 1s ease-in forwards;
-        transform:translateY(-100);
+        animation: fadeSlideUp 1s ease-in forwards;
       }
+
       @keyframes fadeSlideUp {
         to {
           opacity: 1;
+          
         }
       }
 
-      div:hover {  
-        transform:rotate(3deg) scale(1.1);  
-        box-shadow:0 0 10px rgba(0, 0, 0, 1);
+      div:hover {
+        transform: rotate(3deg) scale(1.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+      }
 
-      }  
-      span {  
-        display:flex;  
-        margin-bottom: 5px; /* Add some spacing between input fields */  
-        align-items: center; /* Align labels and inputs vertically */  
-      }  
-      label {  
-        margin-right: 10px; /* Add some spacing between label and input */  
-        width: 100px;       /* Adjust label width for better alignment */  
-        text-align: right;  /* Align label text to the right */  
+      span {
+        display: flex;
+        margin-bottom: 5px; /* Add some spacing between input fields */
+        align-items: center; /* Align labels and inputs vertically */
+      }
+
+      label {
+        margin-right: 10px; /* Add some spacing between label and input */
+        width: 100px;       /* Adjust label width for better alignment */
+        text-align: right;  /* Align label text to the right */
+      }
+
+      input {
+        font-family: Monospace;
+        background: #fbfbfb;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 2px;
+        width: 150px;      /* Set input width */
+        background: rgba(255,255,255,0.1);
+        color:white;
         
-      }  
-      input {  
-        font-family:Monospace;  
-        background:#fbfbgf;  
-        border:1px solid black;  
-        border-radius:20px;  
-        padding:2px;  
-        width: 150px;      /* Set input width */  
+      }
+      input::placeholder {
+        color:rgba(255,255,255,0.4);
+      }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Interest Calculator</h2>
+        <form id="interestForm">
+            <span>
+                <label for="principal">Principal:</label>
+                <input type="number" id="principal" class="input-field" placeholder="Principal (P)" required>
+            </span>
+            <span>
+                <label for="rate">Interest Rate:</label>
+                <input type="number" id="rate" class="input-field" placeholder="Rate of Interest (R)" required>
+            </span>
+            <span>
+                <label for="time">Time:</label>
+                <input type="number" id="time" class="input-field" placeholder="Time (T in years)" required>
+            </span>
+            <br>
+            <button type="submit">Calculate</button>
+            <h4 id="result"></h4>
+        </form>
+    </div>
 
-      }  
-  	</style>  
-</head>  
-<body>  
-    <div>  
-      <h2>Interest Calculator</h2>  
-      <form id="interestForm">  
-        <span>  
-        <label for="principal">Principal:</label><input type="number" id="principal" class="input-field" placeholder="Principal (P)" required></span>  
-        <span><label for="rate">Interest Rate:</label><input type="number" id="rate" class="input-field" placeholder="Rate of Interest (R)" required></span>  
-        <span><label for="time">Time:</label><input type="number" id="time" class="input-field" placeholder="Time (T in years)" required></span>  
+    <script>
+      document.getElementById('interestForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the default form submission
 
-        <br>  
-    	<button type="submit">Calculate</button>  
-        <h4 id="result"></h4>  
-      </form>  
-    </div>  
-</body>  
-  <script>  
-  	document.getElementById('interestForm').addEventListener('submit', function(event) {  
-      event.preventDefault(); // Prevent the default form submission  
+          const principal = parseFloat(document.getElementById('principal').value);
+          const rate = parseFloat(document.getElementById('rate').value);
+          const time = parseFloat(document.getElementById('time').value);
 
-      const principal = parseFloat(document.getElementById('principal').value);  
-      const rate = parseFloat(document.getElementById('rate').value);  
-      const time = parseFloat(document.getElementById('time').value);  
+          if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+              document.getElementById('result').innerHTML = "Please enter valid numbers.";
+              return;
+          }
 
-      if (isNaN(principal) || isNaN(rate) || isNaN(time)) {  
-        document.getElementById('result').innerHTML = "Please enter valid numbers.";  
-        return;  
-      }  
+          const simpleInterest = (principal * rate * time) / 100;
+          const totalAmount = principal + simpleInterest;
 
-      const simpleInterest = (principal * rate * time) / 100;  
-      const totalAmount = principal + simpleInterest;  
-
-      document.getElementById('result').innerHTML = "Total Amount: " + totalAmount.toFixed(2); // Display result  
-    });  
-  </script>  
-</html>  
+          document.getElementById('result').innerHTML = "Total Amount: " + totalAmount.toFixed(2); // Display result
+      });
+    </script>
+</body>
+</html>
